@@ -1,23 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
 
 function App() {
+  const [loading, SetLoading] = useState(true);
+  const [coins, setCoins] = useState([]);
+  const [money, setMoney] = useState(0);
+  const reset = () => setMoney(0);
+  const onChange = (event) => {
+    setMoney(event.target.value);
+  };
+  useEffect(() => {
+    fetch("https://api.coinpaprika.com/v1/tickers")
+      .then((response) => response.json())
+      .then((json) => {
+        setCoins(json);
+        SetLoading(false);
+      });
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>The Coins! {loading ? "" : `(${coins.length})`}</h1>
+      {loading ? (
+        <strong>Loading...</strong>
+      ) : (
+        <div>
+          <label htmlFor="$">$</label>
+          <input
+            id="$"
+            value={money}
+            placeholder="Dollars"
+            type="number"
+            onChange={onChange}
+          />
+          <select>
+            {coins.map((coin) => (
+              <option>
+                {coin.name} ({coin.symbol}): {money / coin.quotes.USD.price}
+              </option>
+            ))}
+          </select>
+          <button onClick={reset}>Reset</button>
+        </div>
+      )}
     </div>
   );
 }
