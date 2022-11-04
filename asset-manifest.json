@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/react-for-you/static/js/main.20f20faa.js",
+    "main.js": "/react-for-you/static/js/main.b8752c9e.js",
     "index.html": "/react-for-you/index.html",
-    "main.20f20faa.js.map": "/react-for-you/static/js/main.20f20faa.js.map"
+    "main.b8752c9e.js.map": "/react-for-you/static/js/main.b8752c9e.js.map"
   },
   "entrypoints": [
-    "static/js/main.20f20faa.js"
+    "static/js/main.b8752c9e.js"
   ]
 }
